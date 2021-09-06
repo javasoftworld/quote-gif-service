@@ -26,7 +26,8 @@ public class QuoteCompareServiceImpl implements QuoteCompareService {
     }
 
     @Override
-    public QuoteCompareResult doCompare(String derivedCurrency) throws BadCurrencyCodeException {
+    public QuoteCompareResult doCompare(String currencyToCompare) throws BadCurrencyCodeException {
+        log.info("==> comparing cross rate currency: BASE {} CURRENCY_TO_LOOK {}", baseCurrency, currencyToCompare);
 
         final QuoteSeriesResponse todayQuotes = quoteServiceClient.getLatestQuotes(apiId);
 
@@ -38,8 +39,8 @@ public class QuoteCompareServiceImpl implements QuoteCompareService {
         try {
             double currentUsdToBaseCurrencyQuote = todayQuotes.getQuotes().get(baseCurrency);
             double yesterdayUsdToBaseCurrencyQuote = dayBeforeQuotes.getQuotes().get(baseCurrency);
-            double currentUsdToDerivedCurrencyQuote = todayQuotes.getQuotes().get(derivedCurrency);
-            double yesterdayUsdToDerivedCurrencyQuote = dayBeforeQuotes.getQuotes().get(derivedCurrency);
+            double currentUsdToDerivedCurrencyQuote = todayQuotes.getQuotes().get(currencyToCompare);
+            double yesterdayUsdToDerivedCurrencyQuote = dayBeforeQuotes.getQuotes().get(currencyToCompare);
 
             double currentCrossRate =
                     calculateCurrencyCrossRate(currentUsdToDerivedCurrencyQuote, currentUsdToBaseCurrencyQuote);
