@@ -22,3 +22,49 @@
 
 ### Nice to Have
 - Сборка и запуск Docker контейнера с этим сервисом
+
+## Как скачать, настроить и запустить из исходников
+
+Запуск на Windows:
+```
+git clone https://github.com/javasoftworld/quote-gif-service.git
+cd quote-gif-service
+gradlew clean build
+java -jar build\libs\exchange-gif-service-1.0.jar
+```
+REST-сервис будет доступен по адресу: <http://localhost:8080/api/v1/compare/{currency}>
+- где {currency} - трехбуквенный код валюты
+
+Например, для сравнения RUB и USD ссылка будет иметь такой вид: <http://localhost:8080/api/v1/compare/USD>
+
+Настройки доступа к внешним сервисам вынесены в файл настроек *application.properties*
+
+По умолчанию в качестве базовой валюты для сравнения в настройках установлен RUB.
+
+При необходимости замены базовой валюты сравнения используйте параметр *api.open-exchange-rates.base* установив ISO-4217 совместимый трехбуквенный код валюты, например: EUR, GBP. 
+
+Запуск на Windows:
+```
+java -jar build\libs\exchange-gif-service-1.0.jar --api.open-exchange-rates.base=THB
+```
+## Запуск из Docker
+
+```
+docker run --name gif-service -p 8080:8080 --detach sergeybelonosov/gif-service:latest
+```
+
+
+### Nice to play! :-)
+
+
+
+
+
+
+
+
+
+
+
+
+
