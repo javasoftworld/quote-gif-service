@@ -38,7 +38,8 @@ public class AppController {
         QuoteCompareResult result = quoteCompareService.doCompare(currencyCode);
 
         String redirectUrlLinkToGifFile = gifLinkComposeService.getGifLink(result);
-        log.info("==> Result of comparison is {}. Composed link is {}", result.toString(), redirectUrlLinkToGifFile);
+        log.info("==> Result of comparison is {}.", result.toString());
+        log.info("==> Composed link is {}.", redirectUrlLinkToGifFile);
         return ResponseEntity
                 .status(HttpStatus.FOUND)
                 .location(URI.create(redirectUrlLinkToGifFile))

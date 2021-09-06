@@ -27,7 +27,7 @@ public class QuoteCompareServiceImpl implements QuoteCompareService {
 
     @Override
     public QuoteCompareResult doCompare(String currencyToCompare) throws BadCurrencyCodeException {
-        log.info("==> comparing cross rate currency: BASE {} CURRENCY_TO_LOOK {}", baseCurrency, currencyToCompare);
+        log.info("==> Comparing cross rate currency: {} to {}", baseCurrency, currencyToCompare);
 
         final QuoteSeriesResponse todayQuotes = quoteServiceClient.getLatestQuotes(apiId);
 
@@ -44,9 +44,11 @@ public class QuoteCompareServiceImpl implements QuoteCompareService {
 
             double currentCrossRate =
                     calculateCurrencyCrossRate(currentUsdToDerivedCurrencyQuote, currentUsdToBaseCurrencyQuote);
-
             double yesterdayCrossRate =
                     calculateCurrencyCrossRate(yesterdayUsdToDerivedCurrencyQuote, yesterdayUsdToBaseCurrencyQuote);
+
+            log.info("==> Today  {} to {} cross rate is {}.", baseCurrency, currencyToCompare, currentCrossRate);
+            log.info("==> Yesderday {} to {} cross rate is {}.", baseCurrency, currencyToCompare, yesterdayCrossRate);
 
             return currentCrossRate > yesterdayCrossRate ? QuoteCompareResult.INCREASE :
                     currentCrossRate < yesterdayCrossRate ? QuoteCompareResult.DECREASE : QuoteCompareResult.EQUAL;
