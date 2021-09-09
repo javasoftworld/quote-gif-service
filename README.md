@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/javasoftworld/quote-gif-service.svg?style=shield)](https://circleci.com/gh/javasoftworld/quote-gif-service)
+[![CircleCI](https://circleci.com/gh/javasoftworld/quote-gif-service.svg?style=svg)](https://circleci.com/gh/javasoftworld/quote-gif-service)
 
 # Gif-Service
 
